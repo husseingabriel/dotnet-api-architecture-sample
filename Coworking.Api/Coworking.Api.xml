@@ -4,11 +4,38 @@
         <name>Coworking.Api</name>
     </assembly>
     <members>
+        <member name="M:Coworking.Api.Controllers.AdminController.Get(System.Int32)">
+            <summary>
+            Get by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Coworking.Api.Controllers.AdminController.GetAll">
+            <summary>
+            Get all admins
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Coworking.Api.Controllers.AdminController.AddAdmin(Coworking.Api.ViewModels.AdminModel)">
             <summary>
             Add a new Admin
             </summary>
             <param name="admin"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Coworking.Api.Controllers.AdminController.UpdateAdmin(Coworking.Api.ViewModels.AdminModel)">
+            <summary>
+            Update an Admin
+            </summary>
+            <param name="admin"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Coworking.Api.Controllers.AdminController.DeleteAdmin(System.Int32)">
+            <summary>
+            Delete Admin by id
+            </summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
     </members>

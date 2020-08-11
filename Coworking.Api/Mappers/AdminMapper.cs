@@ -12,6 +12,7 @@ namespace Coworking.Api.Mappers
         {
             return new Admin()
             {
+                Id = model.Id,
                 Email = model.Email,
                 HiredDate = DateTime.Now,
                 Name = model.Name,

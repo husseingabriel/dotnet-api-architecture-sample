@@ -9,7 +9,10 @@ namespace Coworking.Api.Application.Contracts.Services
 {
     public interface IAdminService
     {
-        Task<string> GetAdminName(int id);
+        Task<Admin> Get(int id);
+        Task<IEnumerable<Admin>> GetAll();
         Task<Admin> AddAdmin(Admin admin);
+        Task<Admin> UpdateAdmin(Admin admin);
+        Task DeleteAdmin(int id);
     }
 }

@@ -21,11 +21,30 @@ namespace Coworking.Api.Controllers
             _adminService = adminService;
         }
 
+        /// <summary>
+        /// Get by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+   
         [HttpGet("{id}")]
+        [Produces("application/json", Type = typeof(AdminModel))]
         public async Task<ActionResult> Get(int id)
         {
-            var name = await _adminService.GetAdminName(id);
-            return Ok(name);
+            var admin = await _adminService.Get(id);
+            return Ok(admin);
+        }
+
+        /// <summary>
+        /// Get all admins
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Produces("application/json", Type = typeof(List<AdminModel>))]
+        public async Task<ActionResult> GetAll()
+        {
+            var admins = await _adminService.GetAll();
+            return Ok(admins);
         }
 
         /// <summary>
@@ -40,8 +59,37 @@ namespace Coworking.Api.Controllers
         [HttpPost]
         public async Task<ActionResult> AddAdmin([FromBody]AdminModel admin)
         {
-            var name = await _adminService.AddAdmin(AdminMapper.Map(admin));
-            return Ok(name);
+            var result = await _adminService.AddAdmin(AdminMapper.Map(admin));
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Update an Admin
+        /// </summary>
+        /// <param name="admin"></param>
+        /// <returns></returns>
+        [ProducesResponseType(200)]
+        [ProducesResponseType(500)]
+        [ProducesResponseType(401)]
+        [Produces("application/json", Type = typeof(AdminModel))]
+        [HttpPut]
+        public async Task<ActionResult> UpdateAdmin([FromBody] AdminModel admin)
+        {
+            var result = await _adminService.UpdateAdmin(AdminMapper.Map(admin));
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Delete Admin by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Produces("application/json", Type = typeof(bool))]
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteAdmin(int id)
+        {
+            await _adminService.DeleteAdmin(id);
+            return Ok();
         }
     }
 }
