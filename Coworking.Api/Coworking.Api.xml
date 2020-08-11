@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Coworking.Api</name>
+    </assembly>
+    <members>
+        <member name="M:Coworking.Api.Controllers.AdminController.AddAdmin(Coworking.Api.ViewModels.AdminModel)">
+            <summary>
+            Add a new Admin
+            </summary>
+            <param name="admin"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

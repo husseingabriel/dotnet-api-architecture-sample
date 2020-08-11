@@ -4,6 +4,10 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\husse\source\repos\Coworking\Coworking.Api\Coworking.Api\Coworking.Api.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <Folder Include="Filters\" />
     <Folder Include="wwwroot\" />
@@ -13,9 +17,12 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.6" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Coworking.Api.CrossCutting\Coworking.Api.CrossCutting.csproj" />
     <ProjectReference Include="..\Coworking.Api.DataAccess\Coworking.Api.DataAccess.csproj" />
   </ItemGroup>
 

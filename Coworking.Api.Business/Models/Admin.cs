@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Coworking.Api.DataAccess.Contracts.Entities
+namespace Coworking.Api.Business.Models
 {
-    public class AdminEntity
+    public class Admin
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public DateTime HiredDate { get; set; }
     }
 }
