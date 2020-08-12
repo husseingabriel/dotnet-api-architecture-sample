@@ -5,14 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Polly" Version="7.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Coworking.Api.Application.Contracts\Coworking.Api.Application.Contracts.csproj" />
     <ProjectReference Include="..\Coworking.Api.Business\Coworking.Api.Business.csproj" />
     <ProjectReference Include="..\Coworking.Api.DataAccess.Contracts\Coworking.Api.DataAccess.Contracts.csproj" />
     <ProjectReference Include="..\Coworking.Api.DataAccess\Coworking.Api.DataAccess.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Mappers\" />
   </ItemGroup>
 
 </Project>

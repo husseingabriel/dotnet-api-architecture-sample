@@ -1,7 +1,9 @@
-﻿using Coworking.Api.Application.Contracts.Services;
+﻿using Coworking.Api.Application.Configuration;
+using Coworking.Api.Application.Contracts.Services;
 using Coworking.Api.Business.Models;
 using Coworking.Api.DataAccess.Contracts.Repositories;
 using Coworking.Api.DataAccess.Mappers;
+using Polly;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +15,12 @@ namespace Coworking.Api.Application.Services
     public class AdminService: IAdminService
     {
         private readonly IAdminRepository _adminRepository;
+        private readonly IAppConfig _appConfig;
 
-        public AdminService(IAdminRepository adminRepository)
+        public AdminService(IAdminRepository adminRepository, IAppConfig appConfig)
         {
             _adminRepository = adminRepository;
+            _appConfig = appConfig;
         }
 
         public async Task<Admin> Get(int id)
@@ -33,8 +37,16 @@ namespace Coworking.Api.Application.Services
 
         public async Task<Admin> AddAdmin(Admin admin)
         {
-            var addedEntity = await _adminRepository.Add(AdminMapper.Map(admin));
-            return AdminMapper.Map(addedEntity);
+
+            var maxTrys = _appConfig.MaxTrys;
+            var timeToWait = TimeSpan.FromSeconds(_appConfig.SecondsToWait);
+
+            var retryPolity = Policy.Handle<Exception>().WaitAndRetryAsync(maxTrys, i=> timeToWait);
+            return await retryPolity.ExecuteAsync(async () =>
+            {
+                var addedEntity = await _adminRepository.Add(AdminMapper.Map(admin));
+                return AdminMapper.Map(addedEntity);
+            });
         }
 
         public async Task<Admin> UpdateAdmin(Admin admin)

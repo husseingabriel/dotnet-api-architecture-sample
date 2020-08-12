@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,6 +24,8 @@ namespace Coworking.Api.DataAccess.Repositories
 
         public async Task<AdminEntity> Add(AdminEntity entity)
         {
+            //throw new Exception("Prueba error");
+
             await _coworkingDBContext.Admins.AddAsync(entity);
             await _coworkingDBContext.SaveChangesAsync();
             return entity;

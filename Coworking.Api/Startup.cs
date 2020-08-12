@@ -32,6 +32,7 @@ namespace Coworking.Api
         {
             services.AddScoped<ICoworkingDBContext, CoworkingDBContext>();
             services.AddDbContext<CoworkingDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DataBaseConnection")));
+            services.AddApplicationInsightsTelemetry(Configuration);
 
             IoCRegister.AddRegistration(services);
             SwaggerConfig.AddRegistration(services);

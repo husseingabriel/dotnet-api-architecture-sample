@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Coworking.Api.Application.Configuration;
+using Coworking.Api.Application.Contracts.ApiCaller;
 using Coworking.Api.Application.Contracts.Services;
+using Coworking.Api.Business.Models;
 using Coworking.Api.Mappers;
 using Coworking.Api.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace Coworking.Api.Controllers
 {
@@ -15,10 +19,16 @@ namespace Coworking.Api.Controllers
     public class AdminController : ControllerBase
     {
         private readonly IAdminService _adminService;
+        private readonly IAppConfig _config;
+        private readonly IConfiguration _conf;
+        private readonly IApiCaller _apiCaller;
 
-        public AdminController(IAdminService adminService)
+        public AdminController(IAdminService adminService, IAppConfig appConfig, IConfiguration conf, IApiCaller apiCaller)
         {
             _adminService = adminService;
+            _config = appConfig;
+            _conf = conf;
+            _apiCaller = apiCaller;
         }
 
         /// <summary>
@@ -31,6 +41,7 @@ namespace Coworking.Api.Controllers
         [Produces("application/json", Type = typeof(AdminModel))]
         public async Task<ActionResult> Get(int id)
         {
+            var response = _apiCaller.GetServiceResponseById<Admin>("admin",1);
             var admin = await _adminService.Get(id);
             return Ok(admin);
         }
